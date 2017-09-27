@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPushLibrary", "JPushLibrary\JPushLibrary.csproj", "{F539344F-5101-4EB3-8671-95EBE132798C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "ConsoleApp1\Sample.csproj", "{7EDD11F1-38E1-4DB7-8E14-48AD2DDC9D7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F539344F-5101-4EB3-8671-95EBE132798C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F539344F-5101-4EB3-8671-95EBE132798C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F539344F-5101-4EB3-8671-95EBE132798C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F539344F-5101-4EB3-8671-95EBE132798C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EDD11F1-38E1-4DB7-8E14-48AD2DDC9D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EDD11F1-38E1-4DB7-8E14-48AD2DDC9D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EDD11F1-38E1-4DB7-8E14-48AD2DDC9D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EDD11F1-38E1-4DB7-8E14-48AD2DDC9D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
