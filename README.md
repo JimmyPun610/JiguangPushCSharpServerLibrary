@@ -2,6 +2,7 @@
 Based on C# server sdk to implement some API for push and slient push to target audience with registration ID
 
 Based on SDK from Jiguang https://docs.jiguang.cn/jpush/server/sdk/csharp_sdk/
+
 You may check for sample for more information.
 
 Parameter information:
