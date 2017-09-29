@@ -22,8 +22,8 @@ namespace ConsoleApp1
                 registration_id = new string[] { "REGISTRATIONID" }
             };
           
-            PushResult pushResult = server.Push("message", false, regIDs, dict, JPushLibrary.Enum.AndroidPriority.PRIORITY_HIGH, JPushLibrary.Enum.AndroidAlertType.All);
-            PushResult slientPushResult = server.PushSlient(dict, false, null, JPushLibrary.Enum.AndroidPriority.PRIORITY_HIGH, "message");
+            PushResult pushResult = server.Push("message", JPushLibrary.Enum.Platform.iOSProductionAndAndroid, regIDs, dict, JPushLibrary.Enum.AndroidPriority.PRIORITY_HIGH, JPushLibrary.Enum.AndroidAlertType.All);
+            PushResult slientPushResult = server.PushSlient(dict, JPushLibrary.Enum.Platform.iOSProductionAndAndroid, null, JPushLibrary.Enum.AndroidPriority.PRIORITY_HIGH, "message");
         }
     }
 }
