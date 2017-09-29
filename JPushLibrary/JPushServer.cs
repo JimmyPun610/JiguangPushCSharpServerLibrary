@@ -61,9 +61,9 @@ namespace JPushLibrary
         /// <param name="extraContent">Extra content on notification, will translate to json</param>
         /// <param name="androidPriority">High/Max : Will have banner in Android</param>
         /// <param name="androidAlertType">Indicator the notification method in Android</param>
-        /// <param name="isApnsProduction">To indicate Apns Envirnoment</param>
+        /// <param name="platform">indicate target platform</param>
         /// <returns>HttpResponse content</returns>
-        public PushResult Push(string message, bool isApnsProduction = true, object targetAudience = null, Dictionary<string, object> extraContent = null
+        public PushResult Push(string message, Enum.Platform platform = Enum.Platform.iOSProductionAndAndroid, object targetAudience = null, Dictionary<string, object> extraContent = null
             , Enum.AndroidPriority androidPriority = Enum.AndroidPriority.PRIORITY_DEFAULT
             , Enum.AndroidAlertType androidAlertType = Enum.AndroidAlertType.All)
         {
@@ -76,15 +76,30 @@ namespace JPushLibrary
                 {
                     payload.Audience = targetAudience;
                 }
+                bool isApnsProduction = false;
+                if (platform == Enum.Platform.iOSProduction || platform == Enum.Platform.iOSProductionAndAndroid)
+                {
+                    isApnsProduction = true;
+                }
                 payload.Options = new Jiguang.JPush.Model.Options
                 {
                     IsApnsProduction = isApnsProduction
                 };
-                payload.Notification = new Jiguang.JPush.Model.Notification
+                payload.Notification = new Jiguang.JPush.Model.Notification();
+                if(platform == Enum.Platform.Android)
                 {
-                    Android = createAndroidNotification(message, androidPriority, extraContent, androidAlertType),
-                    IOS = createIOSNotification(message, extraContent)
-                };
+                    payload.Notification.Android = createAndroidNotification(message, androidPriority, extraContent, androidAlertType);
+                }else if(platform == Enum.Platform.iOSDevelopment || platform == Enum.Platform.iOSProduction)
+                {
+                    payload.Notification.IOS = createIOSNotification(message, extraContent);
+                }else if(platform == Enum.Platform.iOSDevelopmentAndAndroid || platform == Enum.Platform.iOSProductionAndAndroid)
+                {
+                    payload.Notification.IOS = createIOSNotification(message, extraContent);
+                    payload.Notification.Android = createAndroidNotification(message, androidPriority, extraContent, androidAlertType);
+                }
+                
+                   
+                    
                 var result = jPushClient.SendPush(payload);
                 pushResult = new PushResult(result.Content);
             }
@@ -104,11 +119,11 @@ namespace JPushLibrary
         /// </summary>    
         /// <param name="targetAudience">set the target audience</param>
         /// <param name="extraContent">Extra content on the notification</param>
-        /// <param name="isApnsProduction">indicate Apns environment</param>
+        /// <param name="platform">indicate target platform</param>
         /// <param name="androidPriority">High/Max : Will have banner in Android</param>
         /// <param name="message">The banner information. Pass in empty will not show any banner and disappear in notification center</param>
         /// <returns>HttpResponse content</returns>
-        public PushResult PushSlient(Dictionary<string,object> extraContent, bool isApnsProduction = true, object targetAudience = null
+        public PushResult PushSlient(Dictionary<string,object> extraContent, Enum.Platform platform = Enum.Platform.iOSProductionAndAndroid, object targetAudience = null
             , Enum.AndroidPriority androidPriority = Enum.AndroidPriority.PRIORITY_DEFAULT
             , string message = "", Enum.AndroidAlertType alertType = Enum.AndroidAlertType.LightOnly)
         {
@@ -121,15 +136,30 @@ namespace JPushLibrary
                 {
                     payload.Audience = targetAudience;
                 }
+                bool isApnsProduction = false;
+                if (platform == Enum.Platform.iOSProduction || platform == Enum.Platform.iOSProductionAndAndroid)
+                {
+                    isApnsProduction = true;
+                }
                 payload.Options = new Jiguang.JPush.Model.Options
                 {
                     IsApnsProduction = isApnsProduction
                 };
-                payload.Notification = new Jiguang.JPush.Model.Notification
+                payload.Notification = new Jiguang.JPush.Model.Notification();
+                if (platform == Enum.Platform.Android)
                 {
-                    IOS = createSlientIOSNotification(message, extraContent),
-                    Android = createSlientAndroidNotification(message, androidPriority, extraContent, alertType)
-                };
+                    payload.Notification.Android = createSlientAndroidNotification(message, androidPriority, extraContent, alertType);
+                }
+                else if (platform == Enum.Platform.iOSDevelopment || platform == Enum.Platform.iOSProduction)
+                {
+                    payload.Notification.IOS = createSlientIOSNotification(message, extraContent);
+                }
+                else if (platform == Enum.Platform.iOSDevelopmentAndAndroid || platform == Enum.Platform.iOSProductionAndAndroid)
+                {
+                    payload.Notification.IOS = createSlientIOSNotification(message, extraContent);
+                    payload.Notification.Android = createSlientAndroidNotification(message, androidPriority, extraContent, alertType);
+                }
+
                 var result = jPushClient.SendPush(payload);
                 pushResult = new PushResult(result.Content);
             }

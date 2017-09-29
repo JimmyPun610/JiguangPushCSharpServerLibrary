@@ -8,6 +8,15 @@ namespace JPushLibrary
 {
     public class Enum
     {
+        public enum Platform
+        {
+            iOSDevelopment = 1,
+            iOSProduction = 2,
+            Android = 4,
+            iOSDevelopmentAndAndroid = 5,
+            iOSProductionAndAndroid = 6,
+        }
+
         public enum AndroidPriority
         {
             PRIORITY_DEFAULT = 0,
